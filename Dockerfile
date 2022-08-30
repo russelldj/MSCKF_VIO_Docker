@@ -28,4 +28,4 @@ RUN cd ~/catkin_ws/src && git clone https://github.com/KumarRobotics/msckf_vio.g
 # Try to build it
 RUN cd ~/catkin_ws && source /opt/ros/kinetic/setup.bash && catkin_make --pkg msckf_vio --cmake-args -DCMAKE_BUILD_TYPE=Release
 # Make mountpoint
-RUN mkdir /root/bags
+RUN mkdir -p /root/data
