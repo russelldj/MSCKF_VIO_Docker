@@ -29,3 +29,24 @@ RUN cd ~/catkin_ws/src && git clone https://github.com/russelldj/msckf_vio.git &
 RUN cd ~/catkin_ws && source /opt/ros/kinetic/setup.bash && catkin_make --pkg msckf_vio --cmake-args -DCMAKE_BUILD_TYPE=Release
 # Make mountpoint
 RUN mkdir -p /root/data
+
+# VNC visualization
+RUN apt-get update && apt-get install -y \
+  # Install vnc, xvfb for VNC configuration, fluxbox for VNC window managment
+  x11vnc \
+  xvfb \
+  fluxbox
+
+RUN  mkdir ~/.vnc \
+  # Start the VNC server
+  && echo '# VNC setup' >> /root/.bashrc \
+  && echo "export DISPLAY=:20" >> ~/.bashrc \
+  # Always try to start windows management in background to be ready for VNC
+  && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.bashrc
+  # # Clean up unnecessary output files
+  # && echo "rm -f /root/CRATER_GRADER/cg_ws/nohup.out" >> ~/.bashrc
+
+COPY msckf_entrypoint.sh /
+RUN chmod +x /msckf_entrypoint.sh
+ENTRYPOINT ["/msckf_entrypoint.sh"]
+CMD ["bash"]
