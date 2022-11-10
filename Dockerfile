@@ -43,8 +43,10 @@ RUN  mkdir ~/.vnc \
   && echo "export DISPLAY=:20" >> ~/.bashrc \
   # Always try to start windows management in background to be ready for VNC
   && echo "( fluxbox > /dev/null 2>&1 & )" >> ~/.bashrc
-  # # Clean up unnecessary output files
-  # && echo "rm -f /root/CRATER_GRADER/cg_ws/nohup.out" >> ~/.bashrc
+
+# Environment
+RUN echo '# Other environment setup' >> /root/.bashrc \
+  && echo "source /root/catkin_ws/devel/setup.bash" >> /root/.bashrc
 
 COPY msckf_entrypoint.sh /
 RUN chmod +x /msckf_entrypoint.sh
