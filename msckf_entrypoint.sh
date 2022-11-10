@@ -5,7 +5,7 @@ set -e
 # This file runs every time the container is brought up
 
 # Start the VNC server, in shared mode so more than one user can access, must be last command to run
-x11vnc -forever -create -shared &
+x11vnc -forever -create -shared > /dev/null 2>&1 & 
 # ---------------------------------------------------------
 
 exec "$@"

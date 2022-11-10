@@ -48,5 +48,6 @@ RUN  mkdir ~/.vnc \
 
 COPY msckf_entrypoint.sh /
 RUN chmod +x /msckf_entrypoint.sh
+WORKDIR /root/
 ENTRYPOINT ["/msckf_entrypoint.sh"]
 CMD ["bash"]
