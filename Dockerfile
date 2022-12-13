@@ -30,7 +30,10 @@ RUN cd ~ && mkdir catkin_ws && cd catkin_ws && mkdir src && source /opt/ros/kine
 # Clone MSCKF
 RUN cd ~/catkin_ws/src && git clone https://github.com/russelldj/msckf_vio.git && cd ..
 RUN cd ~/catkin_ws/src && git clone https://github.com/rpng/open_vins.git && cd ..
-RUN cd ~/catkin_ws/src && git clone https://github.com/fyandun/ned_enu_tf.git && cd ..  
+RUN cd ~/catkin_ws/src && git clone https://github.com/fyandun/ned_enu_tf.git && cd ..
 RUN cd ~/catkin_ws && source /opt/ros/kinetic/setup.bash && catkin_make --pkg msckf_vio --cmake-args -DCMAKE_BUILD_TYPE=Release && catkin_make --pkg ned_enu_tf
 RUN cd ~/catkin_ws && source /opt/ros/kinetic/setup.bash && catkin_make -j 8
-# Make tool RUN echo "alias src='source ~/catkin_ws/devel/setup.bash'" > ~/.bash_aliases # Make mountpoint RUN mkdir -p /root/data
+# Make tool
+RUN echo "alias src='source ~/catkin_ws/devel/setup.bash'" > ~/.bash_aliases
+# Make mountpoint
+RUN mkdir -p /root/data
